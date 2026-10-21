@@ -1,0 +1,15 @@
+version: 2.1
+jobs:
+  check:
+    docker:
+      - image: cimg/python:3.11-node
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Check local HTML assets and JavaScript syntax
+          command: python .circleci/check_static.py
+workflows:
+  ci:
+    jobs:
+      - check
